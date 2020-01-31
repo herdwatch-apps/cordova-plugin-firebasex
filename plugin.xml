@@ -18,6 +18,8 @@
 	<preference name="FIREBASE_ANALYTICS_COLLECTION_ENABLED" default="true" />
 	<preference name="FIREBASE_PERFORMANCE_COLLECTION_ENABLED" default="true" />
 	<preference name="FIREBASE_CRASHLYTICS_COLLECTION_ENABLED" default="true" />
+	<preference name="FABRIC_API_KEY" />
+	<preference name="FABRIC_API_SECRET" />
 
 	<platform name="android">
 		<preference name="ANDROID_ICON_ACCENT" default="#FF00FFFF" />
@@ -35,16 +37,23 @@
 			<uses-permission android:name="android.permission.INTERNET" />
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.WAKE_LOCK" />
+      <uses-permission android:name="android.permission.VIBRATE" />
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+      <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+      <!-- Android 9-->
+      <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="application">
 			<service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService" />
-			<service android:name="org.apache.cordova.firebase.FirebasePluginMessagingService">
-				<intent-filter>
-					<action android:name="com.google.firebase.MESSAGING_EVENT"/>
-				</intent-filter>
-			</service>
+<!--			<service android:name="org.apache.cordova.firebase.FirebasePluginMessagingService">-->
+<!--				<intent-filter>-->
+<!--					<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+<!--				</intent-filter>-->
+<!--			</service>-->
+			<meta-data android:name="io.fabric.ApiKey" android:value="$FABRIC_API_KEY"/>
 			<receiver android:name="org.apache.cordova.firebase.OnNotificationOpenReceiver"/>
-			<meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/accent" />
+			<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/intercom_push_icon" />
+			<meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/background" />
 			<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id"/>
 			<meta-data android:name="firebase_analytics_collection_enabled" android:value="$FIREBASE_ANALYTICS_COLLECTION_ENABLED" />
 			<meta-data android:name="firebase_performance_collection_enabled" android:value="$FIREBASE_PERFORMANCE_COLLECTION_ENABLED" />
@@ -107,6 +116,22 @@
 
 		<resource-file src="src/ios/GoogleService-Info.plist" />
 
+    <config-file target="*-Info.plist" parent="Fabric">
+      <dict>
+        <key>APIKey</key>
+        <string>$FABRIC_API_KEY</string>
+        <key>Kits</key>
+        <array>
+          <dict>
+            <key>KitInfo</key>
+            <dict/>
+            <key>KitName</key>
+            <string>Crashlytics</string>
+          </dict>
+        </array>
+      </dict>
+    </config-file>
+
 		<header-file src="src/ios/AppDelegate+FirebasePlugin.h" />
 		<source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
 		<header-file src="src/ios/FirebasePlugin.h" />
@@ -127,7 +152,8 @@
 			</pods>
 		</podspec>
 
+    <hook type="after_prepare" src="scripts/after_prepare.js" />
+
 	</platform>
 
-	<hook type="after_prepare" src="scripts/after_prepare.js" />
 </plugin>

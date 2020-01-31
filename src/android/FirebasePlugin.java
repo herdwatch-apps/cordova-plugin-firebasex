@@ -94,6 +94,7 @@ public class FirebasePlugin extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
+                    Fabric.with(applicationContext, new Crashlytics());
                     Log.d(TAG, "Starting Firebase plugin");
                     FirebaseApp.initializeApp(applicationContext);
                     mFirebaseAnalytics = FirebaseAnalytics.getInstance(applicationContext);
@@ -579,7 +580,8 @@ public class FirebasePlugin extends CordovaPlugin {
         cordovaActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                throw new RuntimeException("This is a crash");
+                Crashlytics.getInstance().crash(); // Force a crash https://firebase.google.com/docs/crashlytics/force-a-crash?authuser=0&platform=android
+                // throw new RuntimeException("This is a crash");
             }
         });
     }

@@ -35,6 +35,9 @@ static BOOL registeredForRemoteNotifications = NO;
     
     // Check for permission and register for remote notifications if granted
     [self _hasPermission:^(BOOL result) {}];
+
+    NSLog(@"Starting Fabric with Crashlytics");
+    [Fabric with:@[[Crashlytics class]]];
 }
 
 - (void)getId:(CDVInvokedUrlCommand *)command {

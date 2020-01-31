@@ -28,15 +28,20 @@ module.exports = {
      */
     addShellScriptBuildPhase: function (context, xcodeProjectPath) {
 
-        // Read and parse the XCode project (.pxbproj) from disk.
+      // Read and parse the XCode project (.pxbproj) from disk.
         // File format information: http://www.monobjc.net/xcode-project-file-format.html
         var xcodeProject = xcode.project(xcodeProjectPath);
         xcodeProject.parseSync();
 
-        // Build the body of the script to be executed during the build phase.
-        var script = '"' + '\\"${PODS_ROOT}/Fabric/run\\"' + '"';
 
-        // Generate a unique ID for our new build phase.
+        var packageJSON = utilities.parsePackageJson();
+
+
+      // Build the body of the script to be executed during the build phase.
+        var script = '"' + '\\"${PODS_ROOT}/Fabric/run\\" ' + packageJSON.cordova.plugins['cordova-plugin-firebasex'].FABRIC_API_KEY + " " + packageJSON.cordova.plugins['cordova-plugin-firebasex'].FABRIC_API_SECRET + '"';
+
+
+      // Generate a unique ID for our new build phase.
         var id = xcodeProject.generateUuid();
         // Create the build phase.
         xcodeProject.hash.project.objects.PBXShellScriptBuildPhase[id] = {
