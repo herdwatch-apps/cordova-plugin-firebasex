@@ -124,10 +124,6 @@
 		<source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
 		<header-file src="src/ios/FirebasePlugin.h" />
 		<source-file src="src/ios/FirebasePlugin.m" />
-		<header-file src="src/ios/FirebasePluginMessageReceiver.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiver.m" />
-		<header-file src="src/ios/FirebasePluginMessageReceiverManager.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiverManager.m" />
 
 		<framework src="AuthenticationServices.framework" />
 
@@ -141,7 +137,6 @@
 				<pod name="Firebase/Messaging" spec="6.33.0"/>
 				<pod name="Firebase/Performance" spec="6.33.0"/>
 				<pod name="Firebase/RemoteConfig" spec="6.33.0"/>
-				<pod name="FirebaseFirestore" git="https://github.com/invertase/firestore-ios-sdk-frameworks.git" tag="6.33.0"/>
 				<pod name="Firebase/Crashlytics" spec="6.33.0"/>
 				<pod name="GoogleSignIn" spec="5.0.2"/>
 			</pods>
