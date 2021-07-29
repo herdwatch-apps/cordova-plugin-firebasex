@@ -75,6 +75,7 @@ module.exports = function(context){
 
         var androidHelper = require("./lib/android");
 
+        /**
         // Apply colours
         if(!fs.existsSync(path.resolve(PLATFORM.ANDROID.colorsXml.target))){
             fs.copyFileSync(path.resolve(PLATFORM.ANDROID.colorsXml.src), path.resolve(PLATFORM.ANDROID.colorsXml.target));
@@ -123,7 +124,7 @@ module.exports = function(context){
             utilities.writeJsonToXmlFile($colorsXml, PLATFORM.ANDROID.colorsXml.target);
             utilities.log('Updated colors.xml with accent color');
         }
-
+        */
         if(pluginVariables['ANDROID_FIREBASE_PERFORMANCE_MONITORING'] && pluginVariables['ANDROID_FIREBASE_PERFORMANCE_MONITORING'] === 'true'){
             // Add Performance Monitoring gradle plugin for Android network traffic
             androidHelper.addDependencyToRootGradle(PLATFORM.ANDROID.performanceGradlePlugin.classDef+":"+pluginVariables["ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION"]);
