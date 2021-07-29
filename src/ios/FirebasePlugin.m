@@ -1,5 +1,4 @@
 #import "FirebasePlugin.h"
-#import "FirebasePluginMessageReceiverManager.h"
 #import "AppDelegate+FirebasePlugin.h"
 #import <Cordova/CDV.h>
 #import "AppDelegate.h"
@@ -473,10 +472,6 @@ static NSMutableDictionary* traces;
 
 - (void)sendNotification:(NSDictionary *)userInfo {
     @try {
-        if([FirebasePluginMessageReceiverManager sendNotification:userInfo]){
-            [self _logMessage:@"Message handled by custom receiver"];
-            return;
-        }
         if (self.notificationCallbackId != nil) {
             [self sendPluginDictionaryResultAndKeepCallback:userInfo command:self.commandDelegate callbackId:self.notificationCallbackId];
         } else {
