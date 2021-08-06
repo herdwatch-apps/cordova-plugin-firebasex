@@ -139,6 +139,7 @@
 				<pod name="Firebase/RemoteConfig" spec="6.33.0"/>
 				<pod name="Firebase/Crashlytics" spec="6.33.0"/>
 				<pod name="GoogleSignIn" spec="5.0.2"/>
+                <pod name="Protobuf" spec="3.12.0"/>
 			</pods>
 		</podspec>
 		
