@@ -154,10 +154,6 @@
 		<header-file src="src/ios/FirebasePlugin.h" />
 		<source-file src="src/ios/FirebasePlugin.m" />
 		<header-file src="src/ios/FirebaseWrapper.h" />
-		<header-file src="src/ios/FirebasePluginMessageReceiver.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiver.m" />
-		<header-file src="src/ios/FirebasePluginMessageReceiverManager.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiverManager.m" />
 
 		<framework src="AuthenticationServices.framework" />
 
@@ -173,7 +169,6 @@
 				<pod name="FirebaseMessaging" spec="10.24.0"/>
 				<pod name="FirebasePerformance" spec="10.24.0"/>
 				<pod name="FirebaseRemoteConfig" spec="10.24.0"/>
-				<pod name="FirebaseFirestore" spec="10.24.0"/>
 				<pod name="FirebaseCrashlytics" spec="10.24.0"/>
 				<pod name="FirebaseFunctions" spec="10.24.0"/>
 				<pod name="FirebaseInstallations" spec="10.24.0"/>
