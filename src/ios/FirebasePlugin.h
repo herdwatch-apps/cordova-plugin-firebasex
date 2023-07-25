@@ -1,7 +1,6 @@
 #import <Cordova/CDV.h>
 #import "AppDelegate.h"
 #import "FirebaseWrapper.h"
-@import FirebaseFirestore;
 
 @interface FirebasePlugin : CDVPlugin
 
@@ -106,18 +105,6 @@
 - (void)incrementCounter:(CDVInvokedUrlCommand*)command;
 - (void)stopTrace:(CDVInvokedUrlCommand*)command;
 
-// Firestore
-- (void)addDocumentToFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)setDocumentInFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)updateDocumentInFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)deleteDocumentFromFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)documentExistsInFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)fetchDocumentInFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)fetchFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)listenToDocumentInFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)listenToFirestoreCollection:(CDVInvokedUrlCommand*)command;
-- (void)removeFirestoreListener:(CDVInvokedUrlCommand*)command;
-
 // Functions
 - (void)functionsHttpsCallable:(CDVInvokedUrlCommand*)command;
 
@@ -131,7 +118,6 @@
 // Internals
 + (FirebasePlugin *) firebasePlugin;
 + (NSString*) appleSignInNonce;
-+ (void) setFirestore:(FIRFirestore*) firestoreInstance;
 - (void) handlePluginExceptionWithContext: (NSException*) exception :(CDVInvokedUrlCommand*)command;
 - (void) handlePluginExceptionWithoutContext: (NSException*) exception;
 - (void) _logError: (NSString*)msg;
