@@ -163,6 +163,15 @@
 			</config>
 			<pods use-frameworks="true">
 				<pod name="FirebaseCore" spec="11.2.0"/>
+				<pod name="FirebaseABTesting" spec="11.2.0"/>
+				<pod name="FirebaseCoreInternal" spec="11.2.0"/>
+				<pod name="FirebaseAuthInterop" spec="11.2.0"/>
+				<pod name="FirebaseAppCheckInterop" spec="11.2.0"/>
+				<pod name="FirebaseMessagingInterop" spec="11.2.0"/>
+				<pod name="FirebaseCoreExtension" spec="11.2.0"/>
+				<pod name="FirebaseSessions" spec="11.2.0"/>
+				<pod name="FirebaseSharedSwift" spec="11.2.0"/>
+				<pod name="FirebaseRemoteConfigInterop" spec="11.2.0"/>
 				<pod name="FirebaseAuth" spec="11.2.0"/>
 				<pod name="FirebaseAnalytics" spec="11.2.0"/>
 				<!--<pod name="FirebaseAnalyticsOnDeviceConversion" spec="11.2.0"/>-->
