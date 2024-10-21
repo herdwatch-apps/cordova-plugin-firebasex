@@ -44,6 +44,11 @@
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.WAKE_LOCK" />
 			<!--<uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>-->
+			<uses-permission android:name="android.permission.VIBRATE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+			<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+			<!-- Android 9-->
+			<uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="application">
 			<service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService" />
@@ -149,10 +154,6 @@
 		<header-file src="src/ios/FirebasePlugin.h" />
 		<source-file src="src/ios/FirebasePlugin.m" />
 		<header-file src="src/ios/FirebaseWrapper.h" />
-		<header-file src="src/ios/FirebasePluginMessageReceiver.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiver.m" />
-		<header-file src="src/ios/FirebasePluginMessageReceiverManager.h" />
-		<source-file src="src/ios/FirebasePluginMessageReceiverManager.m" />
 
 		<framework src="AuthenticationServices.framework" />
 
@@ -162,13 +163,21 @@
 			</config>
 			<pods use-frameworks="true">
 				<pod name="FirebaseCore" spec="11.2.0"/>
+				<pod name="FirebaseABTesting" spec="11.2.0"/>
+				<pod name="FirebaseCoreInternal" spec="11.2.0"/>
+				<pod name="FirebaseAuthInterop" spec="11.2.0"/>
+				<pod name="FirebaseAppCheckInterop" spec="11.2.0"/>
+				<pod name="FirebaseMessagingInterop" spec="11.2.0"/>
+				<pod name="FirebaseCoreExtension" spec="11.2.0"/>
+				<pod name="FirebaseSessions" spec="11.2.0"/>
+				<pod name="FirebaseSharedSwift" spec="11.2.0"/>
+				<pod name="FirebaseRemoteConfigInterop" spec="11.2.0"/>
 				<pod name="FirebaseAuth" spec="11.2.0"/>
 				<pod name="FirebaseAnalytics" spec="11.2.0"/>
 				<!--<pod name="FirebaseAnalyticsOnDeviceConversion" spec="11.2.0"/>-->
 				<pod name="FirebaseMessaging" spec="11.2.0"/>
 				<pod name="FirebasePerformance" spec="11.2.0"/>
 				<pod name="FirebaseRemoteConfig" spec="11.2.0"/>
-				<pod name="FirebaseFirestore" spec="11.2.0"/>
 				<pod name="FirebaseCrashlytics" spec="11.2.0"/>
 				<pod name="FirebaseFunctions" spec="11.2.0"/>
 				<pod name="FirebaseInstallations" spec="11.2.0"/>
