@@ -206,6 +206,7 @@ module.exports = {
         xcodeProject.parseSync();
 
         if (utilities.directoryExists(containerDirectorySource)) {
+            utilities.log(`Preparing GoogleTagManager on iOS`);
             try {
                 fs.cpSync(containerDirectorySource, containerDirectoryTarget, {recursive: true});
                 xcodeProject.addResourceFile('container', {
@@ -225,6 +226,7 @@ module.exports = {
         const xcodeProject = xcode.project(xcodeProjectPath);
         xcodeProject.parseSync();
         if(utilities.directoryExists(appContainerDirectory)){
+            utilities.log(`Remove GoogleTagManager container`);
             xcodeProject.removeResourceFile('container', {
                 lastKnownFileType: 'folder',
                 fileEncoding: 9
