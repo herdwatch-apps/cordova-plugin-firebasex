@@ -58,6 +58,13 @@ function ensureUrlSchemeInPlist(urlScheme, appPlist){
 module.exports = {
 
     /**
+     * Value from
+     * https://github.com/apache/cordova-ios/blob/rel/7.0.0/templates/project/__PROJECT_NAME__.xcodeproj/project.pbxproj#L120
+     * TODO: Update after release cordova-ios v8
+     */
+    appPBXGroup: '29B97315FDCFA39411CA2CEA',
+
+    /**
      * Used to get the path to the XCode project's .pbxproj file.
      */
     getXcodeProjectPath: function () {
@@ -189,6 +196,42 @@ module.exports = {
 
         // Finally, write the .pbxproj back out to disk.
         fs.writeFileSync(path.resolve(xcodeProjectPath), xcodeProject.writeSync());
+    },
+
+    addGoogleTagManagerContainer: function (context, xcodeProjectPath) {
+        const appName = utilities.getAppName();
+        const containerDirectorySource = `${context.opts.projectRoot}/resources/ios/container`;
+        const containerDirectoryTarget = `platforms/ios/${appName}/container`;
+        const xcodeProject = xcode.project(xcodeProjectPath);
+        xcodeProject.parseSync();
+
+        if (utilities.directoryExists(containerDirectorySource)) {
+            try {
+                fs.cpSync(containerDirectorySource, containerDirectoryTarget, {recursive: true});
+                xcodeProject.addResourceFile('container', {
+                    lastKnownFileType: 'folder',
+                    fileEncoding: 9
+                }, this.appPBXGroup);
+                fs.writeFileSync(path.resolve(xcodeProjectPath), xcodeProject.writeSync());
+            } catch (error) {
+                utilities.error(error);
+            }
+        }
+    },
+
+    removeGoogleTagManagerContainer: function (context, xcodeProjectPath) {
+        const appName = utilities.getAppName();
+        const appContainerDirectory = `platforms/ios/${appName}/container`;
+        const xcodeProject = xcode.project(xcodeProjectPath);
+        xcodeProject.parseSync();
+        if(utilities.directoryExists(appContainerDirectory)){
+            xcodeProject.removeResourceFile('container', {
+                lastKnownFileType: 'folder',
+                fileEncoding: 9
+            }, this.appPBXGroup);
+            fs.writeFileSync(path.resolve(xcodeProjectPath), xcodeProject.writeSync());
+            fs.rmSync(appContainerDirectory, {recursive: true});
+        }
     },
 
     ensureRunpathSearchPath: function(context, xcodeProjectPath){

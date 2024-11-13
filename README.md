@@ -1657,23 +1657,26 @@ See the [iOS](https://firebase.google.com/docs/in-app-messaging/get-started?plat
 
 # Google Tag Manager
 
-Download your container-config json file from Tag Manager and add a `<resource-file>` node in your `config.xml`.
+https://developers.google.com/tag-platform/tag-manager/mobile
 
 ## Android
 
+1. Create directory `resources/android/containers`
+
+1. Download your container-config json file from Tag Manager and add a `<resource-file>` node in your `config.xml`.
+
 ```xml
 <platform name="android">
-    <resource-file src="GTM-XXXXXXX.json" target="assets/containers/GTM-XXXXXXX.json" />
+    <resource-file src="resources/android/containers/GTM-XXXXXXX.json" target="app/src/main/assets/containers/GTM-XXXXXXX.json" />
     ...
 ```
 
 ## iOS
 
-```xml
-<platform name="ios">
-    <resource-file src="GTM-YYYYYYY.json" />
-    ...
-```
+1. Create directory `resources/ios/container`
+
+1. Download your container-config json file from Tag Manager and to directory.
+
 
 # Performance Monitoring
 
