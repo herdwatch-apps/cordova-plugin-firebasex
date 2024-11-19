@@ -56,8 +56,5 @@
     #import <FirebaseRemoteConfig/FirebaseRemoteConfig.h>
   #endif
 
-  #if __has_include(<GoogleUtilities/GULLogger.h>)
-    #import <GoogleUtilities/GULLogger.h>
-  #endif
 
 #endif  // defined(__has_include)

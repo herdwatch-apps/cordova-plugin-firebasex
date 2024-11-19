@@ -48,13 +48,6 @@ static __weak id <UNUserNotificationCenterDelegate> _prevUserNotificationCenterD
 - (BOOL)application:(UIApplication *)application swizzledDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self application:application swizzledDidFinishLaunchingWithOptions:launchOptions];
     
-    #if DEBUG
-        GULLoggerForceDebug();
-//         NSMutableArray *newArguments = [NSMutableArray arrayWithArray:[[NSProcessInfo processInfo] arguments]];
-//         [newArguments addObject:@"-FIRDebugEnabled"];
-//         [[NSProcessInfo processInfo] setValue:[newArguments copy] forKey:@"arguments"];
-    #endif
-    
     @try{
         instance = self;
         
