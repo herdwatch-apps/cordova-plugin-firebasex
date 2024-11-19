@@ -48,6 +48,11 @@ static __weak id <UNUserNotificationCenterDelegate> _prevUserNotificationCenterD
 - (BOOL)application:(UIApplication *)application swizzledDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self application:application swizzledDidFinishLaunchingWithOptions:launchOptions];
     
+    #if DEBUG
+        NSString *const kFIRPersistedDebugModeKey = @"/google/firebase/debug_mode";
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFIRPersistedDebugModeKey];
+    #endif
+    
     @try{
         instance = self;
         
