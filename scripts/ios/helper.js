@@ -56,14 +56,7 @@ function ensureUrlSchemeInPlist(urlScheme, appPlist){
 
 // Public functions
 module.exports = {
-
-    /**
-     * Value from
-     * https://github.com/apache/cordova-ios/blob/rel/7.0.0/templates/project/__PROJECT_NAME__.xcodeproj/project.pbxproj#L120
-     * TODO: Update after release cordova-ios v8
-     */
-    appPBXGroup: '29B97315FDCFA39411CA2CEA',
-
+    
     /**
      * Used to get the path to the XCode project's .pbxproj file.
      */
@@ -209,10 +202,11 @@ module.exports = {
             utilities.log(`Preparing GoogleTagManager on iOS`);
             try {
                 fs.cpSync(containerDirectorySource, containerDirectoryTarget, {recursive: true});
+                const appPBXGroup = xcodeProject.findPBXGroupKey({name: appName})
                 xcodeProject.addResourceFile('container', {
                     lastKnownFileType: 'folder',
                     fileEncoding: 9
-                }, this.appPBXGroup);
+                }, appPBXGroup);
                 fs.writeFileSync(path.resolve(xcodeProjectPath), xcodeProject.writeSync());
             } catch (error) {
                 utilities.error(error);
@@ -227,10 +221,11 @@ module.exports = {
         xcodeProject.parseSync();
         if(utilities.directoryExists(appContainerDirectory)){
             utilities.log(`Remove GoogleTagManager container`);
+            const appPBXGroup = xcodeProject.findPBXGroupKey({name: appName})
             xcodeProject.removeResourceFile('container', {
                 lastKnownFileType: 'folder',
                 fileEncoding: 9
-            }, this.appPBXGroup);
+            }, appPBXGroup);
             fs.writeFileSync(path.resolve(xcodeProjectPath), xcodeProject.writeSync());
             fs.rmSync(appContainerDirectory, {recursive: true});
         }
