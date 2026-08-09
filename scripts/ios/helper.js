@@ -59,10 +59,23 @@ function ensureUrlSchemeInPlist(urlScheme, appPlist){
 module.exports = {
 
     /**
+     * Resolves the actual iOS platform project folder name on disk. Since cordova-ios 8.0.0
+     * the generated Xcode project/target is always named "App", regardless of the <name> set
+     * in config.xml, so fall back to that when the config-name path doesn't exist.
+     */
+    getAppFolderName: function () {
+        var configName = utilities.getAppName();
+        if (fs.existsSync(path.join("platforms", "ios", configName))) {
+            return configName;
+        }
+        return "App";
+    },
+
+    /**
      * Used to get the path to the XCode project's .pbxproj file.
      */
     getXcodeProjectPath: function () {
-        var appName = utilities.getAppName();
+        var appName = module.exports.getAppFolderName();
         return path.join("platforms", "ios", appName + ".xcodeproj", "project.pbxproj");
     },
 
@@ -193,7 +206,7 @@ module.exports = {
     },
 
     addGoogleTagManagerContainer: function (context, xcodeProjectPath) {
-        const appName = utilities.getAppName();
+        const appName = module.exports.getAppFolderName();
         const containerDirectorySource = `${context.opts.projectRoot}/resources/ios/container`;
         const containerDirectoryTarget = `platforms/ios/${appName}/container`;
         const xcodeProject = xcode.project(xcodeProjectPath);
@@ -216,7 +229,7 @@ module.exports = {
     },
 
     removeGoogleTagManagerContainer: function (context, xcodeProjectPath) {
-        const appName = utilities.getAppName();
+        const appName = module.exports.getAppFolderName();
         const appContainerDirectory = `platforms/ios/${appName}/container`;
         const xcodeProject = xcode.project(xcodeProjectPath);
         xcodeProject.parseSync();

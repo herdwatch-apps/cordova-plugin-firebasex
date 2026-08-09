@@ -11,6 +11,7 @@ var fs = require('fs');
 var path = require("path");
 var execSync = require('child_process').execSync;
 var utilities = require("./lib/utilities");
+var helper = require("./ios/helper");
 
 var appName;
 var pluginVariables = {};
@@ -22,7 +23,7 @@ var PLUGIN_ID;
 var PLATFORM;
 
 var setupEnv = function(){
-    appName = utilities.getAppName();
+    appName = helper.getAppFolderName();
     PLUGIN_ID = utilities.getPluginId();
     PLATFORM = {
         IOS: {
@@ -150,7 +151,6 @@ module.exports = function(context){
         utilities.log('Preparing Firebase on iOS');
         utilities.copyKey(PLATFORM.IOS);
 
-        var helper = require("./ios/helper");
         var xcodeProjectPath = helper.getXcodeProjectPath();
         var podFileModified = false;
         helper.ensureRunpathSearchPath(context, xcodeProjectPath);
