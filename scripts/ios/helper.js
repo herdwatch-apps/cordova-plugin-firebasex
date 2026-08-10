@@ -216,7 +216,7 @@ module.exports = {
             utilities.log(`Preparing GoogleTagManager on iOS`);
             try {
                 fs.cpSync(containerDirectorySource, containerDirectoryTarget, {recursive: true});
-                const appPBXGroup = xcodeProject.findPBXGroupKey({name: appName})
+                const appPBXGroup = xcodeProject.findPBXGroupKey({path: appName})
                 xcodeProject.addResourceFile('container', {
                     lastKnownFileType: 'folder',
                     fileEncoding: 9
@@ -235,7 +235,7 @@ module.exports = {
         xcodeProject.parseSync();
         if(utilities.directoryExists(appContainerDirectory)){
             utilities.log(`Remove GoogleTagManager container`);
-            const appPBXGroup = xcodeProject.findPBXGroupKey({name: appName})
+            const appPBXGroup = xcodeProject.findPBXGroupKey({path: appName})
             xcodeProject.removeResourceFile('container', {
                 lastKnownFileType: 'folder',
                 fileEncoding: 9
