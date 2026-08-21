@@ -73,6 +73,17 @@ variableApplicators.FIREBASE_ANALYTICS_WITHOUT_ADS = function(){
         console.warn(`Failed to find <meta-data android:name="google_analytics_adid_collection_enabled"> in ${PLUGIN_ID}/plugin.xml`);
     }
 
+    // Dropping the AD_ID permission is separable from the rest of "without ads". An app can want
+    // Firebase Analytics built without advertising-ID support while still needing the permission
+    // present in the merged manifest, because another SDK in the same app reads the advertising ID
+    // for its own attribution. Removing it here is app-wide -- tools:node="remove" wins the merge --
+    // so it silently disables that other SDK too. ANDROID_KEEP_AD_ID_PERMISSION opts out of just
+    // this step; it defaults to false, so existing behaviour is unchanged.
+    if(resolveBoolean(pluginVariables.ANDROID_KEEP_AD_ID_PERMISSION)){
+        console.log(`Keeping the ${PLUGIN_ID} AD_ID permission as ANDROID_KEEP_AD_ID_PERMISSION=true`);
+        return;
+    }
+
     const commentedOutAdIdRemoval = `<!--<uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>-->`,
         commentedInAdIdRemoval = `<uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>`,
         commentedOutAdIdRemovalMatch = pluginXmlText.match(commentedOutAdIdRemoval);
